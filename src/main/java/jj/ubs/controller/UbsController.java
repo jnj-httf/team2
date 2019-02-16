@@ -18,6 +18,9 @@ import jj.ubs.domain.UbsService;
 import jj.ubs.domain.infra.Record;
 import lombok.AllArgsConstructor;
 
+/**
+ * The class {@link UbsController} is the main controller of the UBS search application.
+ */
 @Controller
 @AllArgsConstructor
 public class UbsController {
@@ -26,16 +29,37 @@ public class UbsController {
 
     private final LocateFormValidator locateFormValidator;
 
+    /**
+     * Bind validator method.
+     *
+     * @param binder
+     */
     @InitBinder("locateForm")
     protected void formInitBinder(final WebDataBinder binder) {
         binder.addValidators(locateFormValidator);
     }
 
+    /**
+     * Renders the index page.
+     *
+     * @return the page name
+     */
     @GetMapping("/")
     public String index() {
         return "localizar";
     }
 
+    /**
+     * Retrieves the UBS list and render the page.
+     *
+     * @param locateForm
+     *            The location form
+     * @param result
+     *            the binding result
+     * @param model
+     *            the MVC model
+     * @return the page name
+     */
     @PostMapping("/localizar")
     public String locate(@Valid final LocateForm locateForm, final BindingResult result, final Model model) {
         if (result.hasErrors()) {
@@ -58,6 +82,14 @@ public class UbsController {
         return "localizar";
     }
 
+    /**
+     * Fill the Model object with errors, if any.
+     *
+     * @param model
+     *            the Model object
+     * @param result
+     *            the biding result
+     */
     private void fillModelWithErrors(final Model model, final BindingResult result) {
         final List<String> errorList = new ArrayList<>();
         for (final FieldError error : result.getFieldErrors()) {
