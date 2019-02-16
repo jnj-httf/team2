@@ -24,9 +24,8 @@
 <fieldset id="ubs"><legend>Localizar UBS</legend>
   
   <p>Cidade: <input type="text" name="city"  size="20" maxlength="50" placeholder="Digite a cidade" value=""></p>
-
-  <p>Lontitude: <input type="text" name="longitude" id="cLongitude" size="20" maxlength="50" placeholder="Digite a Longitude" value=""></p>
   <p>Latitude: <input type="text" name="latitude" size="20" maxlength="50" placeholder="Digite a Latitude" value=""></p>
+  <p>Lontitude: <input type="text" name="longitude" id="cLongitude" size="20" maxlength="50" placeholder="Digite a Longitude" value=""></p>
   <input type="submit"  value="Pesquisar">
 
 <div th:if="${not #lists.isEmpty(records)}">
