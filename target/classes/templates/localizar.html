@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Consulta UBS</title>
+
+    <link rel="stylesheet" th:href="@{webjars/bootstrap/4.2.1/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
+
+</head>
+
+<body>
+
+
+<main role="main" class="container">
+<form method="POST" action="/localizar">
+    <div class="titulo">
+		<div class="titulo">
+        <h3>Cidade</h3>
+		<input name="city" type='text'>
+		</div>
+	
+		<div class="titulo">
+        <h3>Digite a Latitude</h3>
+		<input name="lattitude" type='text'>
+		</div>
+		
+		<div class="titulo">
+        <h3>Digite a Longitude</h3>
+		<input name="longitude" type='text'/>
+		</div>
+
+		<input type="submit" value="Pesquisar"/>
+
+		<hr/>
+		<table border="1" th:if="${ubs != null}">
+			<tr>
+				<td>Nome estab</td>
+				<td>endereço</td>
+				<td>Bairro</td>
+				<td>Telefone</td>
+			</tr>
+			<tr>
+				<td th:text="${ubs.nomEstab}">Estabelecimento</td>
+				<td th:text="${ubs.dscEndereco}">Endereco</td>
+				<td th:text="${ubs.dscBairro}">Bairro</td>
+				<td th:text="${ubs.dscTelefone}">Telefone</td>
+			</tr>
+		</table>
+		</div>
+</form>		
+</main>
+<!-- /.container -->
+
+<script type="text/javascript" th:src="@{webjars/bootstrap/4.2.1/js/bootstrap.min.js}"></script>
+</body>
+</html>
