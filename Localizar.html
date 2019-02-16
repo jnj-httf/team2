@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Consulta UBS</title>
+
+    <link rel="stylesheet" th:href="@{webjars/bootstrap/4.2.1/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
+
+</head>
+
+<body>
+
+
+<main role="main" class="container">
+
+    <div class="titulo">
+		
+		<div class="titulo">
+        <h3>Digite a Latitude</h3>
+		<input type='text'>
+		
+		<div class="titulo">
+        <h3>Digite a Longitude</h3>
+		<input type='text'>
+
+		<button type="button">Pesquisar</button>
+
+		<hr>
+		<table border="1">
+		   <tr><td>Nome estab</td> <td> endereço</td>  <td> Bairro</td><td> Telefone</td> </tr>
+		</table>
+</main>
+<!-- /.container -->
+
+<script type="text/javascript" th:src="@{webjars/bootstrap/4.2.1/js/bootstrap.min.js}"></script>
+</body>
+</html>
