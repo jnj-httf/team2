@@ -2,9 +2,6 @@ package jj.ubs.domain;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -18,20 +15,8 @@ public class UbsService {
 
     private UbsInvoker ubsInvoker;
 
-    public Record getUbs() {
-        UbsResponse response = ubsInvoker.getUbs(1);
-        return response.getRecords().get(0);
-    }
-
     public Record getNearestUbs(String city, double lattitude, double longitude) {
-        List<Record> allUbs = new LinkedList<>();
-        int page = 1;
-        UbsResponse result = ubsInvoker.getUbsByCity(city, page);
-        allUbs.addAll(result.getRecords());
-        while (result.getMetadata().getNextPage() != null) {
-            result = ubsInvoker.getUbsByCity(city, ++page);
-            allUbs.addAll(result.getRecords());
-        }
+        List<Record> allUbs = getUbsByCity(city);
         System.out.println(allUbs.size()+" Ubs read on "+city);
         Record nearestUbs = null;
         double shortestDistance = Double.MAX_VALUE;
@@ -47,6 +32,18 @@ public class UbsService {
         return nearestUbs;
     }
 
+    public List<Record> getUbsByCity(String city) {
+        List<Record> allUbs = new LinkedList<>();
+        int page = 1;
+        UbsResponse result = ubsInvoker.getUbsByCity(city, page);
+        allUbs.addAll(result.getRecords());
+        while (result.getMetadata().getNextPage() != null) {
+            result = ubsInvoker.getUbsByCity(city, ++page);
+            allUbs.addAll(result.getRecords());
+        }
+        return allUbs;
+    }
+
     public static double calculateDistance(double lat1, double lat2, double lon1, double lon2) {
         final int R = 6371; // Radius of the earth
 
@@ -57,19 +54,5 @@ public class UbsService {
                 * Math.sin(lonDistance / 2) * Math.sin(lonDistance / 2);
         double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
         return R * c * 1000; // convert to meters
-    }
-
-    private void readAllUbs() {
-        //        List<Record> allUbs = new LinkedList<>();
-        //        do {
-        //            UbsResponse result = ubsInvoker.getUbs(0);
-        //            allUbs.addAll(result.getRecords());
-        //        } while ((!Objects.isNull(result.getMetadata().getNextPage())));
-    }
-
-    private Map<String, Record> mapUbsToCity (UbsResponse response) {
-        return response.getRecords()
-                .stream()
-                .collect(Collectors.toMap(Record::getDscCidade, Function.identity()));
     }
 }
