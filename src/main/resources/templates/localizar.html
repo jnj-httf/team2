@@ -1,65 +1,61 @@
-<!DOCTYPE HTML>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
+<!DOCTYPE html>
+<html lang="pt-Br" dir="ltr">
+  <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title></title>
+    <link rel="stylesheet" href="css/formulario.css">
+  </head>
+  <body>
+<p><h1>UBS</h1></p>
+<form method="post" id="fUbs" action="mailto:teste@gmail.com">
+  <!-- get - mais rapido, mas menos seguro (enviar p barra de link) -->
+  <!-- https://atom.io/packages/atom-html-preview  CTRL+SHIFT+H-->
+  <!-- surround - selecionar e inserir tag [https://atom.io/packages/atom-wrap-in-tag] ALT+SHIFT+W-->
+  <!-- <fieldset><fieldse<legend>t> Borda -->
 
-    <title>Consulta UBS</title>
+  <!-- <font color="blue" size="3"><b> -->
 
-    <link rel="stylesheet" th:href="@{webjars/bootstrap/4.2.1/css/bootstrap.min.css}"/>
-    <link rel="stylesheet" th:href="@{/css/main.css}"/>
+<fieldset id="ubs"><legend>Localizar UBS</legend>
+  
+  <p>Cidade: <input type="text" name="city"  size="20" maxlength="50" placeholder="Digite a cidade" value=""></p>
 
-</head>
+  <p>Lontitude: <input type="text" name="longitude" id="cLongitude" size="20" maxlength="50" placeholder="Digite a Longitude" value=""></p>
+  <p>Lagitude: <input type="text" name="latitude" size="20" maxlength="50" placeholder="Digite a Latitude" value=""></p>
+  <input type="submit"  value="Pesquisar">
 
-<body>
+  <table class="table table-dark">
+    <thead>
+      <tr>
+        <th scope="col">Nome estab</th>
+        <th scope="col">Endereço</th>
+        <th scope="col">Bairro</th>
+        <th scope="col">Telefone</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Teste1</td>
+        <td>Mark</td>
+        <td>Otto</td>
+        <td>@mdo</td>
+      </tr>
+      <tr>
+        <td>Teste2</td>
+        <td>Jacob</td>
+        <td>Thornton</td>
+        <td>@fat</td>
+      </tr>
+      <tr>
+        <td>Teste3</td>
+        <td>Larry</td>
+        <td>the Bird</td>
+        <td>@twitter</td>
+      </tr>
+    </tbody>
+  </table>
 
+</p>
 
-<main role="main" class="container">
-<form method="POST" action="/localizar">
-	<div th:if="${not #lists.isEmpty(errorList)}">
-		<div th:each="error : ${errorList}">
-			<span style="color:red;" th:text="${error}">
-			</span>
-		</div>
-	</div>
-    <div class="titulo">
-		<div class="titulo">
-        <h3>Cidade</h3>
-		<input name="city" type='text'>
-		</div>
-	
-		<div class="titulo">
-        <h3>Digite a Latitude</h3>
-		<input name="latitude" type='text'>
-		</div>
-		
-		<div class="titulo">
-        <h3>Digite a Longitude</h3>
-		<input name="longitude" type='text'/>
-		</div>
-
-		<input type="submit" value="Pesquisar"/>
-
-		<hr/>
-		<table border="1" th:if="${ubs != null}">
-			<tr>
-				<td>Nome estab</td>
-				<td>endereço</td>
-				<td>Bairro</td>
-				<td>Telefone</td>
-			</tr>
-			<tr>
-				<td th:text="${ubs.nomEstab}">Estabelecimento</td>
-				<td th:text="${ubs.dscEndereco}">Endereco</td>
-				<td th:text="${ubs.dscBairro}">Bairro</td>
-				<td th:text="${ubs.dscTelefone}">Telefone</td>
-			</tr>
-		</table>
-		</div>
-</form>		
-</main>
-<!-- /.container -->
-
-<script type="text/javascript" th:src="@{webjars/bootstrap/4.2.1/js/bootstrap.min.js}"></script>
-</body>
+</form>
+  </body>
 </html>
