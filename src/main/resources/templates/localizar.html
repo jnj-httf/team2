@@ -35,7 +35,7 @@
 		<input type="submit" value="Pesquisar"/>
 
 		<hr/>
-		<table border="1">
+		<table border="1" th:if="${ubs != null}">
 			<tr>
 				<td>Nome estab</td>
 				<td>endereço</td>
@@ -43,10 +43,10 @@
 				<td>Telefone</td>
 			</tr>
 			<tr>
-				<td>Nome</td>
-				<td>Endereço</td>
-				<td>Bairro</td>
-				<td>Telefone</td>
+				<td th:text="${ubs.nomEstab}">Estabelecimento</td>
+				<td th:text="${ubs.dscEndereco}">Endereco</td>
+				<td th:text="${ubs.dscBairro}">Bairro</td>
+				<td th:text="${ubs.dscTelefone}">Telefone</td>
 			</tr>
 		</table>
 		</div>
