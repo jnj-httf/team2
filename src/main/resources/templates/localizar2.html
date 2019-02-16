@@ -134,6 +134,12 @@ fieldset {
 :-ms-input-placeholder {
   color: #888;
 }
+
+tbody {
+align: center;
+text-color: #000;
+}
+
 </style>
 
 
@@ -171,6 +177,7 @@ fieldset {
         <th scope="col">Telefone</th>
       </tr>
     </thead>
+	
     <tbody>
 		<tr th:each="ubs : ${records}">
 			<td th:text="${ubs.nomEstab}">Estabelecimento</td>
