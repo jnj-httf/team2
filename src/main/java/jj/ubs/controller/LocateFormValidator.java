@@ -30,7 +30,6 @@ public class LocateFormValidator implements Validator {
 
     private void validateLatitude(final String latitude, final Errors errors) {
         if (StringUtils.isEmpty(latitude)) {
-            errors.rejectValue("latitude", null, "A latitude não pode estar vazio.");
             return;
         }
 
@@ -43,7 +42,6 @@ public class LocateFormValidator implements Validator {
 
     private void validateLongitude(final String longitude, final Errors errors) {
         if (StringUtils.isEmpty(longitude)) {
-            errors.rejectValue("longitude", null, "A longitude da cidade não pode estar vazio.");
             return;
         }
 

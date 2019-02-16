@@ -1,5 +1,7 @@
 package jj.ubs.controller;
 
+import org.springframework.util.StringUtils;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,6 +21,10 @@ public class LocateForm {
 
     Double getLongitudeAsDouble() {
         return Double.valueOf(longitude);
+    }
+
+    boolean isOnlyCity() {
+        return StringUtils.isEmpty(latitude) && StringUtils.isEmpty(longitude);
     }
 
 }

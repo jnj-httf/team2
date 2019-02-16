@@ -41,14 +41,14 @@
 		<input type="submit" value="Pesquisar"/>
 
 		<hr/>
-		<table border="1" th:if="${ubs != null}">
+		<table border="1" th:if="${not #lists.isEmpty(records)}">
 			<tr>
 				<td>Nome estab</td>
 				<td>endereço</td>
 				<td>Bairro</td>
 				<td>Telefone</td>
 			</tr>
-			<tr>
+			<tr th:each="ubs : ${records}">
 				<td th:text="${ubs.nomEstab}">Estabelecimento</td>
 				<td th:text="${ubs.dscEndereco}">Endereco</td>
 				<td th:text="${ubs.dscBairro}">Bairro</td>

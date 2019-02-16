@@ -37,15 +37,23 @@ public class UbsController {
     }
 
     @PostMapping("/localizar")
-    public String getNearestUbs(@Valid final LocateForm locateForm, final BindingResult result, final Model model) {
+    public String locate(@Valid final LocateForm locateForm, final BindingResult result, final Model model) {
         if (result.hasErrors()) {
             fillModelWithErrors(model, result);
             return "localizar";
         }
 
-        final Record record = ubsService.getNearestUbs(locateForm.getCity(), locateForm.getLatitudeAsDouble(),
-                locateForm.getLongitudeAsDouble());
-        model.addAttribute("ubs", record);
+        final List<Record> records = new ArrayList<>();
+        if (!locateForm.isOnlyCity()) {
+            final Record record = ubsService.getNearestUbs(locateForm.getCity(), locateForm.getLatitudeAsDouble(),
+                    locateForm.getLongitudeAsDouble());
+            records.add(record);
+        } else {
+            final List<Record> list = ubsService.getUbsByCity(locateForm.getCity());
+            records.addAll(list);
+        }
+
+        model.addAttribute("records", records);
         return "localizar";
     }
 
