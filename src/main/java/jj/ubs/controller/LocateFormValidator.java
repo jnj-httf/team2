@@ -33,9 +33,15 @@ public class LocateFormValidator implements Validator {
             return;
         }
 
+        boolean invalid = false;
+
         try {
-            Double.parseDouble(latitude);
+            final Double number = Double.parseDouble(latitude);
+            invalid = number > 90 || number < -90;
         } catch (final NumberFormatException e) {
+            invalid = true;
+        }
+        if (invalid) {
             errors.rejectValue("latitude", null, "Latitude inválida.");
         }
     }
@@ -45,9 +51,15 @@ public class LocateFormValidator implements Validator {
             return;
         }
 
+        boolean invalid = false;
+
         try {
-            Double.parseDouble(longitude);
+            final Double number = Double.parseDouble(longitude);
+            invalid = number > 180 || number < -180;
         } catch (final NumberFormatException e) {
+            invalid = true;
+        }
+        if (invalid) {
             errors.rejectValue("longitude", null, "Longitude inválida.");
         }
     }
