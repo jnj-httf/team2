@@ -26,10 +26,11 @@
   <p>Cidade: <input type="text" name="city"  size="20" maxlength="50" placeholder="Digite a cidade" value=""></p>
 
   <p>Lontitude: <input type="text" name="longitude" id="cLongitude" size="20" maxlength="50" placeholder="Digite a Longitude" value=""></p>
-  <p>Lagitude: <input type="text" name="latitude" size="20" maxlength="50" placeholder="Digite a Latitude" value=""></p>
+  <p>Latitude: <input type="text" name="latitude" size="20" maxlength="50" placeholder="Digite a Latitude" value=""></p>
   <input type="submit"  value="Pesquisar">
 
-  <table class="table table-dark" th:if="${not #lists.isEmpty(records)}">
+<div th:if="${not #lists.isEmpty(records)}">
+  <table class="table table-dark">
     <thead>
       <tr>
         <th scope="col">Nome estab</th>
@@ -49,7 +50,8 @@
   </table>
 
 </p>
-
+<span th:text="${count} + ' registro' + ${count > 1 ? 's' : ''}"></span>
+</div>
 </form>
   </body>
 </html>

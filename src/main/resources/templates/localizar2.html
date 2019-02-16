@@ -1,4 +1,4 @@
-<style>
+<html><head><style>
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,300,600,400italic);
 * {
   margin: 0;
@@ -30,9 +30,6 @@ body {
 }
 
 #contact input[type="text"],
-#contact input[type="email"],
-#contact input[type="tel"],
-#contact input[type="url"],
 #contact textarea,
 #contact button[type="submit"] {
   font: 400 12px/16px "Roboto", Helvetica, Arial, sans-serif;
@@ -68,9 +65,6 @@ fieldset {
 }
 
 #contact input[type="text"],
-#contact input[type="email"],
-#contact input[type="tel"],
-#contact input[type="url"],
 #contact textarea {
   width: 100%;
   border: 1px solid #ccc;
@@ -80,9 +74,6 @@ fieldset {
 }
 
 #contact input[type="text"]:hover,
-#contact input[type="email"]:hover,
-#contact input[type="tel"]:hover,
-#contact input[type="url"]:hover,
 #contact textarea:hover {
   -webkit-transition: border-color 0.3s ease-in-out;
   -moz-transition: border-color 0.3s ease-in-out;
@@ -143,30 +134,41 @@ fieldset {
 :-ms-input-placeholder {
   color: #888;
 }
+
+tbody {
+align: center;
+text-color: #000;
+}
+
 </style>
 
-<form method="POST" action="/localizar">
-	<div th:if="${not #lists.isEmpty(errorList)}">
+
+</head><body><div class="container">  
+  <form id="contact" action="/localizar" method="POST">
+  	<div th:if="${not #lists.isEmpty(errorList)}">
 		<div th:each="error : ${errorList}">
 			<span style="color:red;" th:text="${error}">
 			</span>
 		</div>
 	</div>
-
-<div class="container">  
-  <form id="contact" action="" method="post">
     <h3>Busca de UBS</h3>
     <h4>Digite a cidade</h4>
     <fieldset>
-      <input placeholder="Cidade" type="text" tabindex="1" required autofocus id="cidade">
+      <input placeholder="Cidade" type="text" tabindex="1" required="" autofocus="" name="city">
     </fieldset>
     <fieldset>
-      <input placeholder="Latitude" name="latitude" type="email" tabindex="2" required id="Latitude">
+      <input placeholder="Latitude" type="text" tabindex="2" name="latitude">
     </fieldset>
     <fieldset>
-      <input placeholder="Longitude" name="longitude" type="tel" tabindex="3" required id="longitude">
+      <input placeholder="Longitude" type="text" tabindex="3" name="longitude">
     </fieldset>
-	<table class="table table-dark" th:if="${not #lists.isEmpty(records)}">
+    <fieldset>
+      <button name="submit" type="submit">Pesquisar</button>
+    </fieldset>
+  </form>
+</div>
+
+<table class="table table-dark" th:if="${not #lists.isEmpty(records)}">
     <thead>
       <tr>
         <th scope="col">Nome estab</th>
@@ -175,6 +177,7 @@ fieldset {
         <th scope="col">Telefone</th>
       </tr>
     </thead>
+	
     <tbody>
 		<tr th:each="ubs : ${records}">
 			<td th:text="${ubs.nomEstab}">Estabelecimento</td>
@@ -184,9 +187,6 @@ fieldset {
 		</tr>
     </tbody>
   </table>
-    <fieldset>
-      <button name="submit" value="Pesquisar" type="submit" id="contact-submit" >Submit</button>
-    </fieldset>
-  </form>
-</div>
-</form>
+
+
+</body></html>
