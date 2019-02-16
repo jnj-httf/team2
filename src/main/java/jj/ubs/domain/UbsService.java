@@ -8,6 +8,9 @@ import jj.ubs.domain.infra.Record;
 import jj.ubs.domain.infra.UbsResponse;
 import lombok.AllArgsConstructor;
 
+/**
+ * Service to retrieve Ubs information.
+ */
 @AllArgsConstructor
 @Service
 public class UbsService {
@@ -15,7 +18,15 @@ public class UbsService {
     private UbsInvoker ubsInvoker;
     private static Map<String, List<Record>> cache = new HashMap<>();
 
-    public Record getNearestUbs(String city, double lattitude, double longitude) {
+    /**
+     * Retrieves the nearest UBS latitude longitude position.
+     *
+     * @param city The city where the UBS is located.
+     * @param latitude The latitude of the position.
+     * @param longitude The logitude of the position.
+     * @return The nearest UBS of the position of the requested city.
+     */
+    public Record getNearestUbs(String city, double latitude, double longitude) {
         List<Record> allUbs = getUbsByCity(city);
         System.out.println(allUbs.size()+" Ubs read on "+city);
         Record nearestUbs = null;
@@ -23,7 +34,7 @@ public class UbsService {
         for (Record ubs : allUbs) {
             double ubsLat = Double.parseDouble(ubs.getVlrLatitude());
             double ubsLong = Double.parseDouble(ubs.getVlrLongitude());
-            double distance = calculateDistance(ubsLat, lattitude, ubsLong, longitude);
+            double distance = calculateDistance(ubsLat, latitude, ubsLong, longitude);
             if (distance < shortestDistance) {
                 nearestUbs = ubs;
                 shortestDistance = distance;
@@ -32,6 +43,12 @@ public class UbsService {
         return nearestUbs;
     }
 
+    /**
+     * Retrieves the list of UBSs of a city.
+     *
+     * @param city The city where the UBSs are located.
+     * @return The list of UBSs of the requested city.
+     */
     public List<Record> getUbsByCity(String city) {
         if(cache.containsKey(city)) {
             return cache.get(city);
@@ -48,7 +65,16 @@ public class UbsService {
         return allUbs;
     }
 
-    public static double calculateDistance(double lat1, double lat2, double lon1, double lon2) {
+    /**
+     * Calculates the distance between two lat/long positions.
+     *
+     * @param lat1 The latitude of the first position.
+     * @param lat2 The latitude of the second position.
+     * @param lon1 The longitude of the first position.
+     * @param lon2 The longitude of the first position.
+     * @return The distance in meters between the two positions.
+     */
+    private double calculateDistance(double lat1, double lat2, double lon1, double lon2) {
         final int R = 6371; // Radius of the earth
 
         double latDistance = Math.toRadians(lat2 - lat1);
