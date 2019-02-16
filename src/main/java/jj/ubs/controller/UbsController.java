@@ -53,6 +53,7 @@ public class UbsController {
             records.addAll(list);
         }
 
+        model.addAttribute("count", records.size());
         model.addAttribute("records", records);
         return "localizar";
     }
