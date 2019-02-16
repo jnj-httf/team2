@@ -1,7 +1,6 @@
 package jj.ubs.domain;
 
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 import org.springframework.stereotype.Service;
 
@@ -14,6 +13,7 @@ import lombok.AllArgsConstructor;
 public class UbsService {
 
     private UbsInvoker ubsInvoker;
+    private static Map<String, List<Record>> cache = new HashMap<>();
 
     public Record getNearestUbs(String city, double lattitude, double longitude) {
         List<Record> allUbs = getUbsByCity(city);
@@ -33,6 +33,9 @@ public class UbsService {
     }
 
     public List<Record> getUbsByCity(String city) {
+        if(cache.containsKey(city)) {
+            return cache.get(city);
+        }
         List<Record> allUbs = new LinkedList<>();
         int page = 1;
         UbsResponse result = ubsInvoker.getUbsByCity(city, page);
@@ -41,6 +44,7 @@ public class UbsService {
             result = ubsInvoker.getUbsByCity(city, ++page);
             allUbs.addAll(result.getRecords());
         }
+        cache.put(city, allUbs);
         return allUbs;
     }
 
