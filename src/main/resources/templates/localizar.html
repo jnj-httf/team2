@@ -15,26 +15,42 @@
 
 
 <main role="main" class="container">
-
+<form method="POST" action="/localizar">
     <div class="titulo">
 		<div class="titulo">
         <h3>Cidade</h3>
-		<input type='text'>
+		<input name="city" type='text'>
+		</div>
 	
 		<div class="titulo">
         <h3>Digite a Latitude</h3>
-		<input type='text'>
+		<input name="lattitude" type='text'>
+		</div>
 		
 		<div class="titulo">
         <h3>Digite a Longitude</h3>
-		<input type='text'>
+		<input name="longitude" type='text'/>
+		</div>
 
-		<button type="button">Pesquisar</button>
+		<input type="submit" value="Pesquisar"/>
 
-		<hr>
+		<hr/>
 		<table border="1">
-		   <tr><td>Nome estab</td> <td> endereço</td>  <td> Bairro</td><td> Telefone</td> </tr>
+			<tr>
+				<td>Nome estab</td>
+				<td>endereço</td>
+				<td>Bairro</td>
+				<td>Telefone</td>
+			</tr>
+			<tr>
+				<td>Nome</td>
+				<td>Endereço</td>
+				<td>Bairro</td>
+				<td>Telefone</td>
+			</tr>
 		</table>
+		</div>
+</form>		
 </main>
 <!-- /.container -->
 
