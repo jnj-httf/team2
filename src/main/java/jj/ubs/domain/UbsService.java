@@ -1,5 +1,7 @@
 package jj.ubs.domain;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -22,10 +24,18 @@ public class UbsService {
     }
 
     public Record getNearestUbs(String city, double lattitude, double longitude) {
-        UbsResponse result = ubsInvoker.getUbsByCity(city, 0);
+        List<Record> allUbs = new LinkedList<>();
+        int page = 1;
+        UbsResponse result = ubsInvoker.getUbsByCity(city, page);
+        allUbs.addAll(result.getRecords());
+        while (result.getMetadata().getNextPage() != null) {
+            result = ubsInvoker.getUbsByCity(city, ++page);
+            allUbs.addAll(result.getRecords());
+        }
+        System.out.println(allUbs.size()+" Ubs read on "+city);
         Record nearestUbs = null;
         double shortestDistance = Double.MAX_VALUE;
-        for (Record ubs : result.getRecords()) {
+        for (Record ubs : allUbs) {
             double ubsLat = Double.parseDouble(ubs.getVlrLatitude());
             double ubsLong = Double.parseDouble(ubs.getVlrLongitude());
             double distance = calculateDistance(ubsLat, lattitude, ubsLong, longitude);
