@@ -6,7 +6,6 @@ jj/ubs/domain/infra/Metadata.class
 jj/ubs/domain/UbsInvoker.class
 jj/ubs/controller/LocateForm.class
 jj/ubs/domain/infra/Record.class
-jj/ubs/domain/infra/UbsByCityRequest.class
 jj/ubs/controller/UbsController.class
 jj/ubs/domain/infra/UbsResponse.class
 jj/ubs/JjHackatonUbsApplication.class
