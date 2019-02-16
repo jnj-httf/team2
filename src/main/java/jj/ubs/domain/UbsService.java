@@ -1,6 +1,7 @@
 package jj.ubs.domain;
 
 import java.util.*;
+import java.util.Map.Entry;
 
 import org.springframework.stereotype.Service;
 
@@ -41,6 +42,27 @@ public class UbsService {
             }
         }
         return nearestUbs;
+    }
+
+    public List<Record> getNearestUbs(String city, double latitude, double longitude, int qtde) {
+        List<Record> allUbs = getUbsByCity(city);
+        System.out.println(allUbs.size()+" Ubs read on "+city);
+        Map<Double, Record> nearestUbs = new TreeMap<>();
+        for (Record ubs : allUbs) {
+            double ubsLat = Double.parseDouble(ubs.getVlrLatitude());
+            double ubsLong = Double.parseDouble(ubs.getVlrLongitude());
+            double distance = calculateDistance(ubsLat, latitude, ubsLong, longitude);
+            nearestUbs.put(distance, ubs);
+        }
+
+        List<Record> ubsList = new ArrayList<>(qtde);
+        Iterator<Entry<Double, Record>> iterator = nearestUbs.entrySet().iterator();
+        for(int i=0; i< qtde; i++) {
+            if (iterator.hasNext()) {
+                ubsList.add(iterator.next().getValue());
+            }
+        }
+        return ubsList;
     }
 
     /**

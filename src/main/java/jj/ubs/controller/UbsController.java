@@ -45,9 +45,9 @@ public class UbsController {
 
         final List<Record> records = new ArrayList<>();
         if (!locateForm.isOnlyCity()) {
-            final Record record = ubsService.getNearestUbs(locateForm.getCity(), locateForm.getLatitudeAsDouble(),
-                    locateForm.getLongitudeAsDouble());
-            records.add(record);
+            final List<Record> record = ubsService.getNearestUbs(locateForm.getCity(), locateForm.getLatitudeAsDouble(),
+                    locateForm.getLongitudeAsDouble(), 3);
+            records.addAll(record);
         } else {
             final List<Record> list = ubsService.getUbsByCity(locateForm.getCity());
             records.addAll(list);
