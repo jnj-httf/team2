@@ -182,7 +182,8 @@ fieldset {
 	
     <tbody >
 		<tr th:each="ubs : ${records}">
-			<td th:text="${ubs.nomEstab}">Estabelecimento</td>
+			<td th:if="${showMap}"><a target="_blank" th:text="${ubs.nomEstab}" th:href="@{'https://www.google.com/maps/dir/' + ${locateForm.latitude} + ',' + ${locateForm.longitude} + '/' + ${ubs.vlrLatitude} + ',' + ${ubs.vlrLongitude}}">Estabelecimento</a></td>
+			<td th:if="${not showMap}" th:text="${ubs.nomEstab}">Estabelecimento</a></td>
 			<td th:text="${ubs.dscEndereco}">Endereco</td>
 			<td th:text="${ubs.dscBairro}">Bairro</td>
 			<td th:text="${ubs.dscTelefone}">Telefone</td>

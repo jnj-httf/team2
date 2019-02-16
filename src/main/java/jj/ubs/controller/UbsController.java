@@ -71,14 +71,17 @@ public class UbsController {
         if (!locateForm.isOnlyCity()) {
             final List<Record> record = ubsService.getNearestUbs(locateForm.getCity(), locateForm.getLatitudeAsDouble(),
                     locateForm.getLongitudeAsDouble(), 3);
+            model.addAttribute("showMap", "true");
             records.addAll(record);
         } else {
             final List<Record> list = ubsService.getUbsByCity(locateForm.getCity());
+            model.addAttribute("showMap", "false");
             records.addAll(list);
         }
 
         model.addAttribute("count", records.size());
         model.addAttribute("records", records);
+        model.addAttribute("locateForm", locateForm);
         return "localizar";
     }
 
