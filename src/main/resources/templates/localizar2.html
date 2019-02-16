@@ -135,11 +135,6 @@ fieldset {
   color: #888;
 }
 
-.table-dark{
-align: center;
-text-color: #000;
-}
-
 </style>
 
 
@@ -168,7 +163,7 @@ text-color: #000;
   </form>
 </div>
 
-<table class="table table-dark" th:if="${not #lists.isEmpty(records)}">
+<table style="align: center; text-color: #000;" th:if="${not #lists.isEmpty(records)}">
     <thead>
       <tr>
         <th scope="col">Nome estab</th>
@@ -178,7 +173,7 @@ text-color: #000;
       </tr>
     </thead>
 	
-    <tbody>
+    <tbody >
 		<tr th:each="ubs : ${records}">
 			<td th:text="${ubs.nomEstab}">Estabelecimento</td>
 			<td th:text="${ubs.dscEndereco}">Endereco</td>
